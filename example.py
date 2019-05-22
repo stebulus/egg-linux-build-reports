@@ -31,6 +31,7 @@ def read_reports(root):
 
 if __name__ == '__main__':
   reports = read_reports(sys.argv[1])
+  commit = sys.argv[2]
   for r in reports:
-    if r["result-checksum"] == "fb074dbb34a531f1e6cf9d14e4edc6e970bfe04b19e92bd9ce0c6740a95cc667":
-      print r["date"], r["build-machine"]["lsb-release"]
+    if r["egg-linux-commit"] == commit:
+      print r["result-checksum"], r["date"], r["build-machine"]["lsb-release"]

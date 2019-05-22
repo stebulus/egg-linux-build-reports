@@ -6,6 +6,6 @@ NR == 1 {
 }
 { for (i in field) value[field[i]] = $i }
 
-value["result-checksum"] == "fb074dbb34a531f1e6cf9d14e4edc6e970bfe04b19e92bd9ce0c6740a95cc667" {
-  print value["date"], value["build-machine/lsb-release"]
+value["egg-linux-commit"] == commit {
+  print value["result-checksum"], value["date"], value["build-machine/lsb-release"]
 }
