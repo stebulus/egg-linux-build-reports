@@ -3,4 +3,6 @@ These directories are produced by the `build-report` script there.
 
 For an example of interpreting them, try
   ./flatten . |awk -f awk-example
+or
+  python2 example.py .
 to get a list of builds with one particular output.
