@@ -1,5 +1,6 @@
 Build reports for https://github.com/stebulus/egg-linux .
-These directories are produced by the `build-report` script there.
+
+These directories are produced by the `build-report` script.
 
 For an example of interpreting them, try
   ./flatten . |awk -f example.awk -v commit=e11acd885d9f5971d2274dc56ee9df469bd9dd48
