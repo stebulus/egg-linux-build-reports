@@ -31,11 +31,11 @@ dirs |while read d; do
   )
 done |cut -c3- |sort -u |readarray -t fields
 
-tabbed "${fields[@]}"
+tabbed report "${fields[@]}"
 dirs |while read d; do
   (
     cd "$d"
-    values=()
+    values=("$d")
     for f in "${fields[@]}"; do
       if [ -e "$f" ]; then
         value=$(cat "$f")

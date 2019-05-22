@@ -26,7 +26,9 @@ def read_reports(root):
   for d in contents(root):
     dd = os.path.join(root, d)
     if os.path.isdir(dd):
-      reports.append(as_dict(dd))
+      report = as_dict(dd)
+      report["report"] = dd
+      reports.append(report)
   return reports
 
 if __name__ == '__main__':
@@ -34,4 +36,5 @@ if __name__ == '__main__':
   commit = sys.argv[2]
   for r in reports:
     if r["egg-linux-commit"] == commit:
-      print r["result-checksum"], r["date"], r["build-machine"]["lsb-release"]
+      print r["result-checksum"], r["date"], \
+        r["report"], r["build-machine"]["lsb-release"]
