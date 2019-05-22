@@ -1,0 +1,49 @@
+#!/bin/bash
+# Read build report directories and emit a tab-separated table
+# (See awk-example for a way to use the output.)
+
+set -euo pipefail
+shopt -s lastpipe
+
+if [ $# -ne 1 ]; then
+  echo >&2 "usage: $0 rootdir"
+  exit 2
+fi
+root=$1
+
+dirs() {
+  for d in "$root"/*; do
+    if [ -d "$d" ]; then
+      echo "$d"
+    fi
+  done
+}
+
+tabbed() {
+  result=$(IFS=$'\t'; echo "$*")
+  echo "$result"
+}
+
+dirs |while read d; do
+  (
+    cd "$d"
+    find . -type f
+  )
+done |cut -c3- |sort -u |readarray -t fields
+
+tabbed "${fields[@]}"
+dirs |while read d; do
+  (
+    cd "$d"
+    values=()
+    for f in "${fields[@]}"; do
+      if [ -e "$f" ]; then
+        value=$(cat "$f")
+        values+=("$value")
+      else
+        values+=("")
+      fi
+    done
+    tabbed "${values[@]}"
+  )
+done

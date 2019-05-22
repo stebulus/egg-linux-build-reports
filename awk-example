@@ -1,0 +1,11 @@
+# example of interpreting the output of flatten
+BEGIN { FS = "\t" }
+NR == 1 {
+  for (i = 1; i <= NF; i++) field[i] = $i
+  next
+}
+{ for (i in field) value[field[i]] = $i }
+
+value["result-checksum"] == "fb074dbb34a531f1e6cf9d14e4edc6e970bfe04b19e92bd9ce0c6740a95cc667" {
+  print value["date"], value["build-machine/lsb-release"]
+}
