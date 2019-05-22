@@ -1,8 +1,13 @@
 Build reports for https://github.com/stebulus/egg-linux .
 
-These directories are produced by the `build-report` script.
+To contribute a build report, download the build-report script
+  https://raw.githubusercontent.com/stebulus/egg-linux-build-reports/master/build-report
+If you ran `./hatch x` to build egg-linux, then run
+  ./build-report YOURNAME . x report
+Then either tar up the `report` directory and email it to me at
+steven@amotlpaa.org, or put it in a PR to this repo.
 
-For an example of interpreting them, try
+For an example of interpreting the reports here, try
   ./flatten . |awk -f example.awk -v commit=e11acd885d9f5971d2274dc56ee9df469bd9dd48
 or
   python2 example.py . e11acd885d9f5971d2274dc56ee9df469bd9dd48
