@@ -37,4 +37,4 @@ if __name__ == '__main__':
   for r in reports:
     if r["egg-linux-commit"] == commit:
       print r["result-checksum"], r["date"], \
-        r["report"], r["build-machine"]["lsb-release"]
+        r["report"], r["build-machine"]["release"]

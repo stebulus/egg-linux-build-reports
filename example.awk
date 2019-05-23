@@ -8,5 +8,5 @@ NR == 1 {
 
 value["egg-linux-commit"] == commit {
   print value["result-checksum"], value["date"], \
-    value["report"], value["build-machine/lsb-release"]
+    value["report"], value["build-machine/release"]
 }
