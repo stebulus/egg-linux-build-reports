@@ -9,6 +9,8 @@ steven@amotlpaa.org, or put it in a PR to this repo.
 
 For an example of interpreting the reports here, try
   ./flatten report |awk -f example.awk -v commit=e11acd885d9f5971d2274dc56ee9df469bd9dd48
-or
+or (if you have Python)
   python2 example.py report e11acd885d9f5971d2274dc56ee9df469bd9dd48
+or (if you have sqlite)
+  ./sql report <<< "select result_checksum, date, report, build_machine_release from build where egg_linux_commit = 'e11acd885d9f5971d2274dc56ee9df469bd9dd48';"
 to get a list of builds from one particular commit.
