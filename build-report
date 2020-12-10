@@ -24,23 +24,3 @@ uname -a >"$out"/build-machine/uname
 true=$(type -p true)
 libc=$(ldd "$true" |sed 's,=>, ,' |awk '$1 ~ /^libc.so/ { print $2 }')
 "$libc" --version |head -n1 >"$out"/build-machine/libc-version
-
-set +e
-curl_err=$(curl -sS --connect-timeout 2 http://169.254.169.254/latest/meta-data 2>&1 >/dev/null)
-curl_ret=$?
-set -e
-case "$curl_ret" in
-  0)
-    curl -sS http://169.254.169.254/latest/meta-data/ami-id \
-      >"$out"/build-machine/ec2-ami-id
-    curl -sS http://169.254.169.254/latest/meta-data/instance-type \
-      >"$out"/build-machine/ec2-instance-type
-    ;;
-  7 | 28)  # 7=fail to connect; 28=timeout
-    # just means it's not an EC2 instance, probably
-    ;;
-  *)
-    echo >&2 "$curl_err"
-    echo >&2 "$0: error: curl exited with code $curl_ret"
-    exit 1
-esac
