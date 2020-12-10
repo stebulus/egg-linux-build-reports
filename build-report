@@ -21,7 +21,8 @@ git --git-dir "$eggLinuxDir"/.git --work-tree "$eggLinuxDir" \
 gcc --version |head -n1 >"$out"/build-machine/gcc-version
 lsb_release -d |sed 's/.*:\s*//' >"$out"/build-machine/release
 uname -a >"$out"/build-machine/uname
-libc=$(ldd /bin/true |sed 's,=>, ,' |awk '$1 ~ /^libc.so/ { print $2 }')
+true=$(type -p true)
+libc=$(ldd "$true" |sed 's,=>, ,' |awk '$1 ~ /^libc.so/ { print $2 }')
 "$libc" --version |head -n1 >"$out"/build-machine/libc-version
 
 set +e
